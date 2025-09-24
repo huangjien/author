@@ -1,6 +1,6 @@
 {
   "name": "author",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "AI Author assistant",
   "keywords": [
     "AI",
@@ -26,6 +26,7 @@
     "test:contract": "jest --testPathPattern=tests/contracts",
     "test:contract:ci": "cross-env NODE_ENV=test jest --runInBand --testPathPattern=tests/contracts"
   },
+  "prepare": "husky install",
   "lint-staged": {
     "**/*.{js,ts,tsx,json,md}": [
       "prettier --write"
