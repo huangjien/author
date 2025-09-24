@@ -54,6 +54,13 @@
 - [ ] T006 [P] Integration test user registration in tests/integration/test_registration.py
 - [ ] T007 [P] Integration test auth flow in tests/integration/test_auth.py
 
+**Constitution Alignment**: Tasks generation MUST ensure the following are created where applicable:
+
+- Contract tests that define API behavior and MUST fail before implementation (Testing Standards).
+- Unit test scaffolding and coverage targets for business logic modules (see Testing Standards coverage guidance).
+- Performance tasks (benchmarks, load tests) for any feature that declares non-trivial performance goals (see
+   Performance & Scalability principle).
+
 ## Phase 3.3: Core Implementation (ONLY after tests are failing)
 - [ ] T008 [P] User model in src/models/user.py
 - [ ] T009 [P] UserService CRUD in src/services/user_service.py

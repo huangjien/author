@@ -45,9 +45,22 @@
 **Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
 
 ## Constitution Check
+
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+This section must validate the feature/spec against the active constitution principles in
+`/memory/constitution.md`. At minimum, the following gates MUST be evaluated and recorded
+in the plan output:
+
+- Code Quality: Does the plan include linting, static analysis, and explicit code-review requirements?
+- Testing Standards: Are contract, integration, and unit test plans included and set to fail before
+   implementation where applicable?
+- UX Consistency: For user-facing features, does the plan reference the design system, accessibility
+   criteria, and UX acceptance tests?
+- Performance & Scalability: Are performance targets and test plans specified when applicable?
+
+If any gate is not satisfied, the plan MUST list required remediation items and mark the Constitution
+Check as FAIL. Plans with FAIL MUST NOT proceed to Phase 0 until the gate items are addressed.
 
 ## Project Structure
 
@@ -209,4 +222,4 @@ ios/ or android/
 - [ ] Complexity deviations documented
 
 ---
-*Based on Constitution v2.1.1 - See `/memory/constitution.md`*
+*Based on Constitution v1.0.0 - See `/memory/constitution.md`*

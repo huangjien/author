@@ -1,23 +1,53 @@
-# [PROJECT NAME] Development Guidelines
+# Author Development Guidelines
 
-Auto-generated from all feature plans. Last updated: [DATE]
+Auto-generated from feature plans. See `/memory/constitution.md` for governing
+principles (Code Quality, Testing Standards, UX Consistency, Performance & Scalability).
+
+**Last updated**: 2025-09-24
 
 ## Active Technologies
-[EXTRACTED FROM ALL PLAN.MD FILES]
+
+List technologies and versions actively used in the project (extracted from plan
+documents). Maintainers MUST update this section when adding or removing major
+technologies. Example format:
+
+- Node.js 20 (if used)
+- TypeScript 5.x
+- Python 3.11
+- PostgreSQL 15
+
+*(If this file is auto-generated, ensure the generator captures the top 3-5
+technologies used project-wide and place details in the automated section.)*
 
 ## Project Structure
+
+Provide a canonical project structure extracted from plans and feature docs. Keep
+this short and update when major re-organization occurs. Example:
+
 ```
-[ACTUAL STRUCTURE FROM PLANS]
+src/
+tests/
+docs/
 ```
 
 ## Commands
-[ONLY COMMANDS FOR ACTIVE TECHNOLOGIES]
+
+Include commonly used developer commands here (build, test, lint, local run).
+Example:
+
+- `npm run build`
+- `npm test`
+- `npm run lint`
 
 ## Code Style
-[LANGUAGE-SPECIFIC, ONLY FOR LANGUAGES IN USE]
+
+Document language-specific style and formatting choices (links to linters,
+formatters, and style guides). CI MUST enforce these rules.
 
 ## Recent Changes
-[LAST 3 FEATURES AND WHAT THEY ADDED]
+
+List the last 3 features / changes and what they added. Keep this section
+informational (auto-generated where possible; manual edits allowed below).
 
 <!-- MANUAL ADDITIONS START -->
 <!-- MANUAL ADDITIONS END -->

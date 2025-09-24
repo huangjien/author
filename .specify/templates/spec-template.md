@@ -37,6 +37,12 @@
 - **Optional sections**: Include only when relevant to the feature
 - When a section doesn't apply, remove it entirely (don't leave as "N/A")
 
+This spec template MUST align with the Constitution. In particular:
+
+- Every Functional Requirement entry MUST be testable and include explicit acceptance criteria (see Testing Standards).
+- If the feature is user-facing, include UX acceptance criteria and accessibility targets (see User Experience Consistency).
+- Performance targets and constraints MUST be declared if the feature influences latency, throughput, or resource usage.
+
 ### For AI Generation
 When creating this spec from a user prompt:
 1. **Mark all ambiguities**: Use [NEEDS CLARIFICATION: specific question] for any assumption you'd need to make
@@ -73,6 +79,9 @@ When creating this spec from a user prompt:
 - **FR-003**: Users MUST be able to [key interaction, e.g., "reset their password"]
 - **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
 - **FR-005**: System MUST [behavior, e.g., "log all security events"]
+
+*Constitution alignment*: Each FR must be mapped to one or more constitution principles (Code Quality,
+Testing Standards, UX Consistency, Performance & Scalability) in the spec metadata.
 
 *Example of marking unclear requirements:*
 - **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
