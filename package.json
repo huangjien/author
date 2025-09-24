@@ -1,0 +1,25 @@
+{
+  "name": "author",
+  "version": "0.0.1",
+  "description": "AI Author assistant",
+  "keywords": [
+    "AI",
+    "Author",
+    "Editor"
+  ],
+  "homepage": "https://github.com/huangjien/author#readme",
+  "bugs": {
+    "url": "https://github.com/huangjien/author/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huangjien/author.git"
+  },
+  "license": "MIT",
+  "author": "Jien Huang",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  }
+}
