@@ -5,6 +5,7 @@
 ### Suggestion
 
 Fields:
+
 - `id: string` (UUID)
 - `type: 'replacement'|'completion'|'improvement'|'grammar_fix'`
 - `text: string`
@@ -19,6 +20,7 @@ Fields:
 ### WritingSession
 
 Fields:
+
 - `id: string`
 - `startTime: number`
 - `endTime?: number`
@@ -31,6 +33,7 @@ Fields:
 ### ActivityLogEntry
 
 Fields:
+
 - `id: string`
 - `sessionId: string`
 - `timestamp: number`

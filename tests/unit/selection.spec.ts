@@ -1,4 +1,4 @@
-import { validateSelection } from '../../../src/utils/selection';
+import { validateSelection } from '../../src/utils/selection';
 
 describe('validateSelection', () => {
   test('null or undefined selection returns invalid', () => {
@@ -18,6 +18,9 @@ describe('validateSelection', () => {
     expect(validateSelection(long)).toEqual({ valid: true, text: long, selectionLength: 5000 });
 
     const tooLong = 'x'.repeat(5001);
-    expect(validateSelection(tooLong)).toEqual({ valid: false, reason: 'Selection exceeds maximum allowed length (5000)' });
+    expect(validateSelection(tooLong)).toEqual({
+      valid: false,
+      reason: 'Selection exceeds maximum allowed length (5000)',
+    });
   });
 });

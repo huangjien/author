@@ -15,6 +15,7 @@ revisited after the user provides the requested Clarifications section.
   feature impacts latency)
 
 Remediations / TODOs:
+
 - TODO(CLARIFICATIONS): Insert `## Clarifications` → `### Session` in the spec describing
   storage, retention, export formats, and privacy consent. This was deferred by user.
 

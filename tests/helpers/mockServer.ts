@@ -24,7 +24,7 @@ export function createMockServer(port = 3001) {
 
   return {
     close: () =>
-      new Promise<null>((resolve) => {
+      new Promise<null>(resolve => {
         server.close(() => resolve(null));
       }),
     url: `http://localhost:${port}`,

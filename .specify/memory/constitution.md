@@ -79,11 +79,11 @@ Rationale: Explicit performance goals prevent silent regressions and ensure pred
 - Feature specs MUST include explicit acceptance criteria (functional, UX, performance, and security).
 - The CI pipeline MUST run linting, unit tests, contract tests, integration tests, and (where applicable) performance and visual regression checks.
 - Pre-merge checklist (automatable where possible):
-	1. Lint & static analysis passed
-	2. Tests (unit/integration/contract) pass in CI
-	3. Performance gates satisfied or documented exception
-	4. Accessibility/UX criteria documented and verified
-	5. Release notes and migration steps included for breaking changes
+  1.  Lint & static analysis passed
+  2.  Tests (unit/integration/contract) pass in CI
+  3.  Performance gates satisfied or documented exception
+  4.  Accessibility/UX criteria documented and verified
+  5.  Release notes and migration steps included for breaking changes
 
 ### Versioning Policy
 
