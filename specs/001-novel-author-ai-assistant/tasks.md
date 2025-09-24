@@ -4,6 +4,7 @@
 **Prerequisites**: See implementation-plan.md for tech stack (TypeScript, VS Code Extension API)
 
 ## Execution Flow (main)
+
 1. Setup environment and test tooling
 2. Write TDD-first tests (contract/unit/integration)
 3. Implement core modules (models, services, diff/decorations)
@@ -13,6 +14,7 @@
 ## Numbering convention: T001, T002, ...
 
 ## Phase 1: Setup
+
 - T001 Initialize feature folder and confirm plan
   - Path: `/specs/001-novel-author-ai-assistant/implementation-plan.md`
   - Action: Ensure `implementation-plan.md` exists and team agrees on milestones
@@ -24,6 +26,7 @@
   - Action: Ensure `tsconfig.json` includes strict mode (already present)
 
 ## Phase 2: Tests First (TDD) — must be written and failing before implementation
+
 - T004 [P] Contract test: POST /api/suggestions
   - Path: `/specs/001-novel-author-ai-assistant/tests/contracts/test_suggestions_contract.spec.ts`
   - Action: Implement contract assertions for request shape and response schema (see `contracts/suggestions-contract.md`)
@@ -38,6 +41,7 @@
   - Action: End-to-end test: selection -> POST /api/suggestions -> suggestions displayed -> preview decorations applied; simulate remote failure and fallback to mock
 
 ## Phase 3: Core Implementation (only after tests exist and fail)
+
 - T008 Implement `Suggestion` model (from data-model.md)
   - Path: `src/models/suggestion.ts`
   - Action: Create TypeScript model matching `data-model.md` entity fields
@@ -58,6 +62,7 @@
   - Action: Commands: `generateSuggestions`, `previewChanges`, `applySuggestion`, `dismissSuggestion`
 
 ## Phase 4: Integration
+
 - T014 [P] Wire AIService to SuggestionManager and webview
   - Path: `src/webview/SuggestionsPanelProvider.ts`, `src/services/*`
   - Action: Connect message passing: webview -> extension host -> aiService -> webview
@@ -69,6 +74,7 @@
   - Action: Test start/pause/resume/end and export only when user opts in
 
 ## Phase 5: Polish & Performance
+
 - T017 [P] Accessibility and UX polish for webview and decorations
   - Path: `src/webview/*`, `src/services/decorationManager.ts`
   - Action: Keyboard navigation, color contrast checks, screen reader labels
@@ -79,11 +85,13 @@
   - Path: `/specs/001-novel-author-ai-assistant/quickstart.md`, `README.md`
 
 ## Parallel execution guidance
+
 - Can run in parallel: T002 and T003 (setup tasks)
 - Can run in parallel: T004, T005, T006, T007 (test authoring across different files) — mark [P]
 - Implementation tasks per file are sequential: e.g., T008 before T011 if they share files
 
 ## Task agent commands (examples)
+
 - Run selection unit tests:
   - `npm run test:unit -- tests/unit/selection.spec.ts`
 - Run contract tests:
@@ -92,16 +100,18 @@
   - `node mock-backend/src/server.js`
 
 ## Dependency notes
+
 - Tests (T004-T007) must exist and fail before implementing T008-T013
 - Models (T008-T009) must exist before services (T010-T012)
 - Webview wiring (T014) depends on T010-T012
 
 ## Validation checklist
+
 - [ ] Every contract in `contracts/` has a contract test task (T004)
 - [ ] All entities from `data-model.md` have model tasks (T008-T009)
 - [ ] Integration tests reflect quickstart scenarios
 - [ ] All paths referenced exist in the repo structure before marking tasks complete
 
-
 ---
+
 Generated from `.specify` artifacts on 2025-09-24

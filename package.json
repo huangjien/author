@@ -1,6 +1,6 @@
 {
   "name": "author",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "AI Author assistant",
   "keywords": [
     "AI",
@@ -23,8 +23,12 @@
     "test": "jest",
     "test:unit": "jest --testPathPattern=tests/unit",
     "test:integration": "jest --testPathPattern=tests/integration",
+    "test:integration:run": "ts-node ./test/suite/runTest.ts",
     "test:contract": "jest --testPathPattern=tests/contracts",
-    "test:contract:ci": "cross-env NODE_ENV=test jest --runInBand --testPathPattern=tests/contracts"
+    "test:contract:ci": "cross-env NODE_ENV=test jest --runInBand --testPathPattern=tests/contracts",
+    "check:ts": "tsc --noEmit",
+    "check:format": "prettier --check .",
+    "check": "npm run check:ts && npm run check:format"
   },
   "prepare": "husky install",
   "lint-staged": {
@@ -45,6 +49,7 @@
     "@types/supertest": "^2.0.12",
     "husky": "^8.0.0",
     "lint-staged": "^13.0.0",
-    "prettier": "^3.0.0"
+    "prettier": "^3.0.0",
+    "ts-node": "^10.9.1"
   }
 }

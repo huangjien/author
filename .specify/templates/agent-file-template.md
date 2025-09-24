@@ -16,8 +16,8 @@ technologies. Example format:
 - Python 3.11
 - PostgreSQL 15
 
-*(If this file is auto-generated, ensure the generator captures the top 3-5
-technologies used project-wide and place details in the automated section.)*
+_(If this file is auto-generated, ensure the generator captures the top 3-5
+technologies used project-wide and place details in the automated section.)_
 
 ## Project Structure
 
