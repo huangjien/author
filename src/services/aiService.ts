@@ -6,10 +6,13 @@ export type AIServiceOptions = {
 };
 
 export class AIService {
-  constructor(private opts: AIServiceOptions = {}) {}
+  private backendUrl?: string;
+  constructor(opts: AIServiceOptions = {}) {
+    this.backendUrl = opts.backendUrl;
+  }
 
   async requestSuggestions(text: string): Promise<Suggestion[]> {
-    const url = this.opts.backendUrl ?? 'http://localhost:3001/api/suggestions';
+    const url = this.backendUrl ?? 'http://localhost:3001/api/suggestions';
 
     try {
       const res = await fetch(url, {
