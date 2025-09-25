@@ -9,24 +9,36 @@ export async function generateSuggestions(
   suggestionManager: SuggestionManager,
   text: string
 ) {
-  panel.postMessage({ type: 'status', payload: 'requesting' });
+  if (panel && typeof panel.postMessage === 'function') {
+    panel.postMessage({ type: 'status', payload: 'requesting' });
+  }
   const raw = await aiService.requestSuggestions(text);
   const suggestions = suggestionManager.filterAndSort(raw, {
     minConfidence: 0.0,
     maxSuggestions: 10,
   });
-  panel.postMessage({ type: 'suggestions', payload: suggestions });
+  if (panel && typeof panel.postMessage === 'function') {
+    panel.postMessage({ type: 'suggestions', payload: suggestions });
+  }
   return suggestions;
 }
 
 export function previewChanges(panel: SuggestionsPanelProvider, suggestion: Suggestion) {
-  panel.postMessage({ type: 'preview', payload: suggestion });
+  if (panel && typeof panel.postMessage === 'function') {
+    panel.postMessage({ type: 'preview', payload: suggestion });
+  }
 }
 
 export function applySuggestion(panel: SuggestionsPanelProvider, suggestion: Suggestion) {
-  panel.postMessage({ type: 'apply', payload: suggestion });
+  if (panel && typeof panel.postMessage === 'function') {
+    panel.postMessage({ type: 'apply', payload: suggestion });
+  }
 }
 
 export function dismissSuggestion(panel: SuggestionsPanelProvider, suggestionId: string) {
-  panel.postMessage({ type: 'dismiss', payload: { id: suggestionId } });
+  if (panel && typeof panel.postMessage === 'function') {
+    panel.postMessage({ type: 'dismiss', payload: { id: suggestionId } });
+  }
 }
+
+export default { generateSuggestions, previewChanges, applySuggestion, dismissSuggestion };

@@ -5,6 +5,8 @@ export interface Suggestion {
   type: SuggestionType;
   content: string;
   confidence: number; // 0..1
+  // optional reason string explaining the confidence score (e.g. 'keyword_match')
+  confidenceReason?: string;
   metadata?: Record<string, unknown>;
 }
 
@@ -13,6 +15,7 @@ export function createSuggestion(params: {
   type: SuggestionType;
   content: string;
   confidence?: number;
+  confidenceReason?: string;
   metadata?: Record<string, unknown>;
 }): Suggestion {
   const confidence = params.confidence ?? 0.5;
@@ -21,6 +24,7 @@ export function createSuggestion(params: {
     type: params.type,
     content: params.content,
     confidence: Math.max(0, Math.min(1, confidence)),
+    confidenceReason: params.confidenceReason,
     metadata: params.metadata,
   };
 }
