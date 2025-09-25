@@ -44,20 +44,34 @@ describe('E2E flow (T014-T015)', () => {
       },
     ];
 
-    // Mock sessionStorage to spy on saveSession
+    // Mock sessionStorage with comprehensive exports
     const saveCalls: any[] = [];
-    const mockSessionStorage = {
-      saveSession: (sess: any, path: string) => {
-        saveCalls.push({ sess, path });
-      },
-      loadSession: () => null,
-      createSession: (p: any) => ({
-        id: 'default',
-        filePath: p.filePath || p.path || 'default-path',
-        suggestions: [],
+    const loadCalls: any[] = [];
+    const createCalls: any[] = [];
+
+    const mockSaveSession = jest.fn((session: any, path: string) => {
+      saveCalls.push({ session, path });
+    });
+    const mockLoadSession = jest.fn((path: string) => {
+      loadCalls.push({ path });
+      return null; // No existing session
+    });
+    const mockCreateSession = jest.fn((params: any) => {
+      createCalls.push(params);
+      return {
+        id: params.id,
+        filePath: params.filePath,
         status: 'started',
         createdAt: new Date().toISOString(),
-      }),
+        updatedAt: new Date().toISOString(),
+      };
+    });
+
+    // Create the default export object
+    const defaultExport = {
+      saveSession: mockSaveSession,
+      loadSession: mockLoadSession,
+      createSession: mockCreateSession,
     };
 
     // Create a singleton instance for the panel
@@ -103,19 +117,14 @@ describe('E2E flow (T014-T015)', () => {
     // Mock session storage module path used by extension
     jest.doMock('../../src/storage/sessionStorage', () => ({
       __esModule: true,
-      default: {
-        saveSession: mockSessionStorage.saveSession,
-        loadSession: mockSessionStorage.loadSession,
-        createSession: mockSessionStorage.createSession,
-      },
-      createSession: mockSessionStorage.createSession,
-      loadSession: mockSessionStorage.loadSession,
-      saveSession: mockSessionStorage.saveSession,
-      pauseSession: jest.fn().mockImplementation(s => ({ ...s, status: 'paused' })),
-      resumeSession: jest.fn().mockImplementation(s => ({ ...s, status: 'started' })),
-      endSession: jest.fn().mockImplementation(s => ({ ...s, status: 'ended' })),
+      default: defaultExport,
+      saveSession: mockSaveSession,
+      loadSession: mockLoadSession,
+      createSession: mockCreateSession,
+      pauseSession: jest.fn(),
+      resumeSession: jest.fn(),
+      endSession: jest.fn(),
       exportSession: jest.fn(),
-      WritingSession: {},
     }));
 
     // Require extension after mocks are in place

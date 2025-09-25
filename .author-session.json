@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "filePath": "/Users/huangjien/workspace/author/.author-session.json",
+  "status": "started",
+  "createdAt": "2025-09-25T08:19:44.011Z",
+  "updatedAt": "2025-09-25T08:19:44.011Z",
+  "suggestions": [
+    {
+      "id": "mock-1",
+      "type": "improvement",
+      "content": "Mock suggestion for: selected text",
+      "confidence": 0.5,
+      "confidenceReason": "mock_fallback"
+    }
+  ]
+}

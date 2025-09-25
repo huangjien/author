@@ -81,7 +81,7 @@ describe('Webview interaction scenarios (T016)', () => {
       { virtual: true }
     );
 
-    // Mock sessionStorage with a more complete implementation
+    // Mock sessionStorage with comprehensive exports
     jest.doMock(
       '../../src/storage/sessionStorage',
       () => {
@@ -93,16 +93,23 @@ describe('Webview interaction scenarios (T016)', () => {
           suggestions: [],
         };
 
+        const mockSaveSession = jest.fn();
+        const mockLoadSession = jest.fn().mockReturnValue(null);
+        const mockCreateSession = jest.fn().mockReturnValue(mockSession);
+
+        // Create the default export object
+        const defaultExport = {
+          saveSession: mockSaveSession,
+          loadSession: mockLoadSession,
+          createSession: mockCreateSession,
+        };
+
         return {
           __esModule: true,
-          default: {
-            saveSession: jest.fn(),
-            loadSession: jest.fn().mockReturnValue(null),
-            createSession: jest.fn().mockReturnValue(mockSession),
-          },
-          createSession: jest.fn().mockReturnValue(mockSession),
-          loadSession: jest.fn().mockReturnValue(null),
-          saveSession: jest.fn(),
+          default: defaultExport,
+          saveSession: mockSaveSession,
+          loadSession: mockLoadSession,
+          createSession: mockCreateSession,
           pauseSession: jest.fn().mockImplementation(s => ({ ...s, status: 'paused' })),
           resumeSession: jest.fn().mockImplementation(s => ({ ...s, status: 'started' })),
           endSession: jest.fn().mockImplementation(s => ({ ...s, status: 'ended' })),
@@ -200,7 +207,7 @@ describe('Webview interaction scenarios (T016)', () => {
       { virtual: true }
     );
 
-    // Mock sessionStorage with a more complete implementation
+    // Mock sessionStorage with comprehensive exports
     jest.doMock(
       '../../src/storage/sessionStorage',
       () => {
@@ -212,16 +219,23 @@ describe('Webview interaction scenarios (T016)', () => {
           suggestions: [],
         };
 
+        const mockSaveSession = jest.fn();
+        const mockLoadSession = jest.fn().mockReturnValue(null);
+        const mockCreateSession = jest.fn().mockReturnValue(mockSession);
+
+        // Create the default export object
+        const defaultExport = {
+          saveSession: mockSaveSession,
+          loadSession: mockLoadSession,
+          createSession: mockCreateSession,
+        };
+
         return {
           __esModule: true,
-          default: {
-            saveSession: jest.fn(),
-            loadSession: jest.fn().mockReturnValue(null),
-            createSession: jest.fn().mockReturnValue(mockSession),
-          },
-          createSession: jest.fn().mockReturnValue(mockSession),
-          loadSession: jest.fn().mockReturnValue(null),
-          saveSession: jest.fn(),
+          default: defaultExport,
+          saveSession: mockSaveSession,
+          loadSession: mockLoadSession,
+          createSession: mockCreateSession,
           pauseSession: jest.fn().mockImplementation(s => ({ ...s, status: 'paused' })),
           resumeSession: jest.fn().mockImplementation(s => ({ ...s, status: 'started' })),
           endSession: jest.fn().mockImplementation(s => ({ ...s, status: 'ended' })),
