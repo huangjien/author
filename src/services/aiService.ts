@@ -43,7 +43,6 @@ export class AIService {
         type: 'improvement',
         content: `Mock suggestion for: ${text.slice(0, 80)}`,
         confidence: 0.5,
-        confidenceReason: 'mock_fallback',
       },
     ];
   }

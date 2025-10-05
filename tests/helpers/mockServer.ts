@@ -15,7 +15,6 @@ export function createMockServer(port = 3001) {
           type: 'improvement',
           content: `Replace passive voice in: ${text?.slice(0, 80) ?? ''}`,
           confidence: 0.92,
-          confidenceReason: 'high_keyword_match',
         },
       ],
     });

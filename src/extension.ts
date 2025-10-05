@@ -18,20 +18,6 @@ import {
   applySuggestion,
   dismissSuggestion,
 } from './commands';
-import sessionStorage, {
-  createSession,
-  loadSession,
-  WritingSession,
-} from './storage/sessionStorage';
-import { join } from 'path';
-import { Suggestion } from './models/suggestion';
-import {
-  startSession,
-  pauseSession,
-  resumeSession,
-  endSession,
-  exportSession,
-} from './commands/sessionCommands';
 
 export function activate(context?: any) {
   if (!vscode) return;
@@ -39,34 +25,12 @@ export function activate(context?: any) {
   const panelProvider = new SuggestionsPanelProvider();
   const ai = new AIService();
   const mgr = new SuggestionManager();
-  const sessionPath = join(process.cwd(), '.author-session.json');
-  let session: WritingSession | null = loadSession(sessionPath);
-
-  // Restore last session if available
-  if (session) {
-    panelProvider.showSuggestions(session.suggestions ?? []);
-  }
 
   context.subscriptions.push(
     vscode.commands.registerCommand('author.generateSuggestions', async () => {
       const editor = vscode.window.activeTextEditor;
       const text = editor?.document.getText(editor.selection) ?? '';
-      const suggestions: Suggestion[] = await generateSuggestions(
-        panelProvider as any,
-        ai,
-        mgr,
-        text
-      );
-
-      // Persist last suggestions into session for later inspection
-      try {
-        const sess = session ?? createSession({ id: 'default', filePath: sessionPath });
-        sess.suggestions = suggestions;
-        sessionStorage.saveSession(sess, sessionPath);
-        session = sess;
-      } catch (e) {
-        // ignore persistence errors in lightweight flow
-      }
+      await generateSuggestions(panelProvider as any, ai, mgr, text);
     })
   );
 
@@ -85,63 +49,6 @@ export function activate(context?: any) {
   context.subscriptions.push(
     vscode.commands.registerCommand('author.dismissSuggestion', (id: string) => {
       dismissSuggestion(panelProvider as any, id);
-    })
-  );
-
-  // Session commands
-  context.subscriptions.push(
-    vscode.commands.registerCommand('author.startSession', () => {
-      session = startSession(sessionPath);
-    })
-  );
-
-  context.subscriptions.push(
-    vscode.commands.registerCommand('author.pauseSession', () => {
-      if (session) {
-        session = pauseSession(session, sessionPath);
-      }
-    })
-  );
-
-  context.subscriptions.push(
-    vscode.commands.registerCommand('author.resumeSession', () => {
-      if (session) {
-        session = resumeSession(session, sessionPath);
-      }
-    })
-  );
-
-  context.subscriptions.push(
-    vscode.commands.registerCommand('author.endSession', () => {
-      if (session) {
-        session = endSession(session, sessionPath);
-        session = null; // Clear session after ending
-      }
-    })
-  );
-
-  context.subscriptions.push(
-    vscode.commands.registerCommand('author.exportSession', async () => {
-      if (!session) {
-        vscode.window.showInformationMessage('No active session to export.');
-        return;
-      }
-
-      const shouldExport = await vscode.window.showInformationMessage(
-        'Do you want to export the current session? This may include sensitive data.',
-        'Yes',
-        'No'
-      );
-
-      if (shouldExport === 'Yes') {
-        const exportPath = await vscode.window.showSaveDialog({
-          defaultUri: vscode.Uri.file(join(process.cwd(), 'author-session-export.json')),
-        });
-        if (exportPath) {
-          exportSession(session, exportPath.fsPath);
-          vscode.window.showInformationMessage(`Session exported to ${exportPath.fsPath}`);
-        }
-      }
     })
   );
 }
